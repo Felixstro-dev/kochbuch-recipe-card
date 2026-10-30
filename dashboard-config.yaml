@@ -1,0 +1,56 @@
+# Home Assistant Lovelace Dashboard - Recipe Cards
+# Fügt Rezeptkarten aus dem kochbuch-Backend ein
+
+recipes:
+  mode: "ideas"  # ideas | full | next-step | inspiration
+  filter_web_only: true  # Nur Web-Rezeptideen zeigen
+  show_shopping_list: true  # Einkaufsliste Button anzeigen
+  search_query: "Backen"  # Suchbegriff
+  columns: 3  # Anzahl der Karten pro Reihe
+  
+# Einzelne Rezeptkarten-Konfigurationen
+# Jede Karte zeigt ein anderes Rezept basierend auf der Suche
+
+# Kleine Karte - Ideen Ansicht (Standard)
+recipe_ideas:
+  type: "custom:ha-recipe-card"
+  mode: "ideas"
+  filter_web_only: true
+  search_query: "Backen"
+  show_shopping_list: true
+  height: "min-max"
+  min_height: 300
+  max_height: 350
+
+# Große Karte - Vollständige WebUI Ansicht
+recipe_full:
+  type: "custom:ha-recipe-card"
+  mode: "full"
+  filter_web_only: true
+  search_query: "Backen"
+  show_shopping_list: true
+  height: "min-max"
+  min_height: 400
+  max_height: 500
+
+# Mittlere Karte - Nächster Schritt Ansicht
+recipe_next_step:
+  type: "custom:ha-recipe-card"
+  mode: "next-step"
+  filter_web_only: true
+  search_query: "Backen"
+  show_shopping_list: true
+  height: "min-max"
+  min_height: 200
+  max_height: 250
+
+# Inspirationskarte
+recipe_inspiration:
+  type: "custom:ha-recipe-card"
+  mode: "inspiration"
+  filter_web_only: true
+  search_query: "Backen"
+  show_shopping_list: true
+  height: "min-max"
+  min_height: 250
+  max_height: 300
