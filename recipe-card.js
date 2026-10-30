@@ -414,7 +414,65 @@
     }
 
     customElements.define('ha-recipe-card', HaRecipeCard);
-    
+
+    // HACS requires getConfig() for custom card validation
+    HaRecipeCard.getConfig = function() {
+      return {
+        name: 'Recipe Card',
+        description: 'Custom card for kochbuch backend - shows recipes with multiple views and shopping list',
+        config: {
+          type: 'object',
+          properties: {
+            mode: {
+              type: 'string',
+              default: 'ideas',
+              enum: ['ideas', 'full', 'next-step', 'inspiration'],
+              here: true,
+              description: 'Ansicht der Rezeptidee'
+            },
+            filter_web_only: {
+              type: 'boolean',
+              default: true,
+              here: true,
+              description: 'Nur Web-Rezepte filtern'
+            },
+            search_query: {
+              type: 'string',
+              default: 'Backen',
+              here: true,
+              description: 'Suchbegriff'
+            },
+            show_shopping_list: {
+              type: 'boolean',
+              default: true,
+              here: true,
+              description: 'Einkaufsliste Button anzeigen'
+            },
+            columns: {
+              type: 'integer',
+              default: 3,
+              here: true,
+              description: 'Anzahl Karten pro Reihe'
+            },
+            min_height: {
+              type: 'integer',
+              default: null,
+              here: true,
+              description: 'Minimale Kartenhöhe'
+            },
+            max_height: {
+              type: 'integer',
+              default: null,
+              here: true,
+              description: 'Maximale Kartenhöhe'
+            }
+          },
+          required: []
+        },
+        preview: ''
+      };
+    };
+
     // Notify HA that config has been processed
     if (window.customCards) {
       window.customCards = window.customCards || [];
