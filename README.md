@@ -30,6 +30,14 @@ Kochbuch-Backend anzeigt.
    `EMBED_PUBLIC=true` erlaubt Lesezugriff ohne Anmeldung. Alternativ einen
    API-Key im Kochbuch anlegen und in der Karte unter `api_key` eintragen.
 
+4. Optional: Web-UI direkt ausliefern (`FRONTEND_DIR`) und iframe-Einbettung
+   erlauben (`FRAME_ANCESTORS`):
+
+   ```env
+   FRONTEND_DIR=/pfad/zu/frontend/build
+   FRAME_ANCESTORS="'self' http://192.168.3.146:8123"
+   ```
+
 ## Installation über HACS
 
 1. HACS → Drei-Punkte-Menü → **Benutzerdefinierte Repositories**
@@ -64,6 +72,22 @@ show_shopping_list: true
 | `filter_web_only` | Nur Rezepte aus der Web-Quelle | `false` |
 | `show_shopping_list` | Einkaufsliste-Button anzeigen | `true` |
 | `api_key` | API-Key für geschützte Backends | – |
+
+## Alternative: ganze Web-UI als iframe
+
+Wenn du lieber die komplette Kochbuch-Webseite im Dashboard willst, brauchst du
+die Rezeptkarte nicht – dafür gibt es die eingebaute Lovelace-iframe-Karte. Das
+Backend liefert die Web-UI selbst aus:
+
+```yaml
+type: iframe
+url: "http://192.168.30.9:8000/?embed=1"
+title: Kochbuch
+aspect_ratio: "100%"
+```
+
+`?embed=1` blendet die Navigation aus. Beim ersten Aufruf musst du das
+Administrator-Konto anlegen.
 
 ## Fehlerbehebung
 
