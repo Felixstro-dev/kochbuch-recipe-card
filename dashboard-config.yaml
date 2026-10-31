@@ -8,7 +8,7 @@
 type: custom:ha-recipe-card
 base_url: "http://192.168.30.9:8000"
 mode: ideas
-filter_web_only: true
+filter_web_only: false
 search_query: "Backen"
 limit: 10
 show_shopping_list: true

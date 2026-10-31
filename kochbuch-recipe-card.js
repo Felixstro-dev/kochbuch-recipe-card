@@ -150,7 +150,7 @@
         this._filterWebOnly =
           this._config.filter_web_only !== undefined
             ? this._config.filter_web_only
-            : this._config.filterWebOnly !== false;
+            : this._config.filterWebOnly === true;
         this._baseUrl = (this._config.base_url || this._config.baseUrl || '').replace(/\/$/, '');
         this._apiKey = this._config.api_key || this._config.apiKey || '';
         this._limit = this._config.limit || 50;
@@ -529,7 +529,7 @@
             search_query: 'Backen',
             mode: 'ideas',
             limit: 10,
-            filter_web_only: true,
+            filter_web_only: false,
             show_shopping_list: true,
             api_key: ''
           },
@@ -633,7 +633,7 @@
         mode: 'ideas',
         search_query: 'Backen',
         limit: 10,
-        filter_web_only: true,
+        filter_web_only: false,
         show_shopping_list: true
       };
     };

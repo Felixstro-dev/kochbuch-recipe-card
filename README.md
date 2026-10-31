@@ -48,7 +48,7 @@ base_url: "http://192.168.30.9:8000"   # IP:Port des Backends (nicht Home Assist
 mode: ideas                             # ideas | full | next-step | inspiration
 search_query: "Backen"
 limit: 10
-filter_web_only: true
+filter_web_only: false
 show_shopping_list: true
 # api_key: "kb_..."                     # nur nötig, wenn EMBED_PUBLIC=false
 ```
@@ -61,7 +61,7 @@ show_shopping_list: true
 | `mode` | Ansicht: `ideas`, `full`, `next-step`, `inspiration` | `ideas` |
 | `search_query` | Suchbegriff | `Backen` |
 | `limit` | Maximale Anzahl Rezepte (1–50) | `50` |
-| `filter_web_only` | Nur Rezepte aus der Web-Quelle | `true` |
+| `filter_web_only` | Nur Rezepte aus der Web-Quelle | `false` |
 | `show_shopping_list` | Einkaufsliste-Button anzeigen | `true` |
 | `api_key` | API-Key für geschützte Backends | – |
 
