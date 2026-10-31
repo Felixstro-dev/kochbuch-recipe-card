@@ -17,7 +17,12 @@ Kochbuch-Backend anzeigt.
 2. Das Backend lauscht auf allen Interfaces, nicht nur auf `127.0.0.1`:
 
    ```bash
-   uvicorn app.main:app --host 0.0.0.0 --port 8000
+   uvicorn app.main:app --host 0.0.0.0 --port 8080
+   ```
+   Alternativ als Dauerlauf (Autostart nach Reboot):
+
+   ```bash
+   systemctl --user enable --now kochbuch-backend
    ```
 
 3. CORS ist erlaubt (in `.env` des Backends):
@@ -52,7 +57,7 @@ Der visuelle Editor öffnet sich automatisch. Alternativ per YAML:
 
 ```yaml
 type: custom:ha-recipe-card
-base_url: "http://192.168.30.9:8000"   # IP:Port des Backends (nicht Home Assistant!)
+base_url: "http://192.168.30.9:8080"   # IP:Port des Backends (nicht Home Assistant!)
 mode: ideas                             # ideas | full | next-step | inspiration
 search_query: "Backen"
 limit: 10
@@ -81,7 +86,7 @@ Backend liefert die Web-UI selbst aus:
 
 ```yaml
 type: iframe
-url: "http://192.168.30.9:8000/?embed=1"
+url: "http://192.168.30.9:8080/?embed=1"
 title: Kochbuch
 aspect_ratio: "100%"
 ```
@@ -93,7 +98,7 @@ Administrator-Konto anlegen.
 
 - **„Failed to fetch“** → `base_url` falsch, Backend lauscht nur auf
   `127.0.0.1`, oder CORS fehlt. Die URL muss die LAN-IP des Backend-Rechners
-  sein (z. B. `http://192.168.30.9:8000`), nicht die Home-Assistant-Adresse.
+  sein (z. B. `http://192.168.30.9:8080`), nicht die Home-Assistant-Adresse.
 - **HTTP 401** → Backend erreichbar, aber ohne Freigabe. `EMBED_PUBLIC=true`
   setzen oder `api_key` konfigurieren.
 - **Karte fehlt in der Auswahl** → Browser-Cache leeren bzw. HA neu starten.

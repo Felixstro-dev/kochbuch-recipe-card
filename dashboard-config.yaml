@@ -6,7 +6,7 @@
 
 # Kleine Karte – Ideen-Ansicht
 type: custom:ha-recipe-card
-base_url: "http://192.168.30.9:8000"
+base_url: "http://192.168.30.9:8080"
 mode: ideas
 filter_web_only: false
 search_query: "Backen"
@@ -17,21 +17,21 @@ show_shopping_list: true
 
 # Vollständige WebUI-Ansicht
 # type: custom:ha-recipe-card
-# base_url: "http://192.168.30.9:8000"
+# base_url: "http://192.168.30.9:8080"
 # mode: full
 # search_query: "Backen"
 # limit: 10
 
 # Nächster-Schritt-Ansicht (klein)
 # type: custom:ha-recipe-card
-# base_url: "http://192.168.30.9:8000"
+# base_url: "http://192.168.30.9:8080"
 # mode: next-step
 # search_query: "Backen"
 # limit: 10
 
 # Inspirations-Ansicht
 # type: custom:ha-recipe-card
-# base_url: "http://192.168.30.9:8000"
+# base_url: "http://192.168.30.9:8080"
 # mode: inspiration
 # search_query: "Backen"
 # limit: 10

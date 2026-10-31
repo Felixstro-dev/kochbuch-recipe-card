@@ -167,7 +167,7 @@
 
       async _fetchRecipes() {
         if (!this._baseUrl) {
-          this.innerHTML = `<div class="error-msg">Bitte <code>base_url</code> setzen, z. B. <code>http://192.168.30.9:8000</code>.</div>`;
+          this.innerHTML = `<div class="error-msg">Bitte <code>base_url</code> setzen, z. B. <code>http://192.168.30.9:8080</code>.</div>`;
           return;
         }
         this.innerHTML = '<div class="loading">Rezepte werden geladen …</div>';
@@ -584,7 +584,7 @@
             @media (max-width: 600px) { .row { grid-template-columns: 1fr; gap: 4px; } }
           </style>
           <div class="editor">
-            ${this._field('Backend-URL', 'base_url', 'text', 'placeholder="http://192.168.30.9:8000"')}
+            ${this._field('Backend-URL', 'base_url', 'text', 'placeholder="http://192.168.30.9:8080"')}
             ${this._field('Suchbegriff', 'search_query', 'text', 'placeholder="Backen"')}
             ${this._field('Ansicht', 'mode', 'select')}
             ${this._field('Max. Rezepte', 'limit', 'number', 'min="1" max="50"')}
@@ -593,7 +593,7 @@
             ${this._field('API-Key (optional)', 'api_key', 'password', 'placeholder="leer lassen, wenn EMBED_PUBLIC aktiv ist"')}
             <p class="note">
               Die Backend-URL ist die Adresse des Rechners, auf dem das Kochbuch-Backend läuft
-              (Port <code>8000</code>), nicht die von Home Assistant.
+              (Port <code>8080</code>), nicht die von Home Assistant.
             </p>
           </div>
         `;
@@ -629,7 +629,7 @@
 
     HaRecipeCard.getStubConfig = function () {
       return {
-        base_url: 'http://192.168.30.9:8000',
+        base_url: 'http://192.168.30.9:8080',
         mode: 'ideas',
         search_query: 'Backen',
         limit: 10,
