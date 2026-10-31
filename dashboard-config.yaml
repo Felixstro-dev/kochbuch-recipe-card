@@ -1,36 +1,37 @@
 # Home Assistant Lovelace – Kochbuch Recipe Card
-# Beispielkonfigurationen für das kochbuch-Backend
+# Beispielkonfigurationen für das Kochbuch-Backend
 
-# WICHTIG: base_url auf die Adresse deines Backends setzen
-# (die IP/Port, unter der Home Assistant das Backend erreicht).
+# WICHTIG: base_url = LAN-IP des Rechners, auf dem das Backend läuft.
+# Nicht die Home-Assistant-IP verwenden!
 
-# Kleine Karte – Ideen-Ansicht (Standard)
+# Kleine Karte – Ideen-Ansicht
 type: custom:ha-recipe-card
-base_url: "http://192.168.1.20:8080"
+base_url: "http://192.168.30.9:8000"
 mode: ideas
 filter_web_only: true
 search_query: "Backen"
+limit: 10
 show_shopping_list: true
 
 # --- Weitere Ansichten (jeweils als eigene Karte) ---
 
 # Vollständige WebUI-Ansicht
 # type: custom:ha-recipe-card
-# base_url: "http://192.168.1.20:8080"
+# base_url: "http://192.168.30.9:8000"
 # mode: full
-# filter_web_only: true
 # search_query: "Backen"
+# limit: 10
 
 # Nächster-Schritt-Ansicht (klein)
 # type: custom:ha-recipe-card
-# base_url: "http://192.168.1.20:8080"
+# base_url: "http://192.168.30.9:8000"
 # mode: next-step
-# filter_web_only: true
 # search_query: "Backen"
+# limit: 10
 
 # Inspirations-Ansicht
 # type: custom:ha-recipe-card
-# base_url: "http://192.168.1.20:8080"
+# base_url: "http://192.168.30.9:8000"
 # mode: inspiration
-# filter_web_only: true
 # search_query: "Backen"
+# limit: 10
