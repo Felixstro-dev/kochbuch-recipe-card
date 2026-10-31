@@ -117,10 +117,25 @@
     // Create the card component
     class HaRecipeCard extends HTMLElement {
       setConfig(config) {
-        this._config = config;
+        this._config = config || {};
         this._recipes = [];
-        this._currentView = 'ideas'; // ideas, full, next-step, inspiration
+        // Support both snake_case (YAML) and camelCase
+        this._currentView =
+          this._config.mode || this._config.view || 'ideas';
         this._shoppingList = new Set();
+        if (this._config.show_shopping_list === false) {
+          this._shoppingListEnabled = false;
+        } else {
+          this._shoppingListEnabled = true;
+        }
+        this._searchQuery =
+          this._config.search_query || this._config.query || 'Backen';
+        this._filterWebOnly =
+          this._config.filter_web_only !== undefined
+            ? this._config.filter_web_only
+            : this._config.filterWebOnly !== false;
+        this._baseUrl = (this._config.base_url || this._config.baseUrl || '').replace(/\/$/, '');
+        this._limit = this._config.limit || 50;
         this._fetchRecipes();
       }
 
@@ -130,18 +145,19 @@
 
       async _fetchRecipes() {
         try {
-          const response = await fetch(
-            `/api/v1/search?q=${encodeURIComponent(this._config.query || '')}&limit=50`
-          );
-          if (!response.ok) throw new Error('Network error');
+          const url = `${this._baseUrl}/api/v1/search?q=${encodeURIComponent(
+            this._searchQuery
+          )}&limit=${this._limit}`;
+          const response = await fetch(url, { credentials: 'omit' });
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
           const data = await response.json();
-          
+
           // Filter to only web recipes if configured
           const allRecipes = data.items || [];
-          this._recipes = this._config.filterWebOnly
-            ? allRecipes.filter(r => r.source === 'web')
+          this._recipes = this._filterWebOnly
+            ? allRecipes.filter((r) => r.source === 'web')
             : allRecipes;
-          
+
           this._render();
         } catch (err) {
           console.error('Error fetching recipes:', err);
@@ -197,7 +213,7 @@
             
             ${content}
             
-            ${this._renderShoppingButton(recipe)}
+            ${this._shoppingListEnabled ? this._renderShoppingButton(recipe) : ''}
           </div>
         `;
 
@@ -219,7 +235,7 @@
         const labels = {
           ideas: 'Ideen',
           full: 'Vollständige WebUI',
-          next-step: 'Nächster Schritt',
+          'next-step': 'Nächster Schritt',
           inspiration: 'Inspiration'
         };
         return labels[view] || view;
@@ -367,9 +383,11 @@
         const tags = recipe.tags || [];
         
         if (categories.length > 0 || tags.length > 0) {
+          const categoryText = categories.length > 0 ? `Kategorie: ${categories.join(', ')}` : '';
+          const tagText = tags.length > 0 ? `Schlagwörter: ${tags.join(', ')}` : '';
+          const sep = categoryText && tagText ? ' | ' : '';
           html += `<div style="margin: 8px 0; font-size: 12px; color: var(--secondary-text-color, #aaa);">
-            ${categories.length > 0 ? `Kategorie: ${categories.join(', ')}` : ''}
-            ${tags.length > 0 ? ${categories.length > 0 ? ' | ' : ''}Schlagwörter: ${tags.join(', ')} : ''}
+            ${categoryText}${sep}${tagText}
           </div>`;
         }
 
@@ -423,6 +441,12 @@
         config: {
           type: 'object',
           properties: {
+            base_url: {
+              type: 'string',
+              default: 'http://homeassistant.local:8080',
+              here: true,
+              description: 'Basis-URL deines Kochbuch-Backends (z. B. http://192.168.1.20:8080)'
+            },
             mode: {
               type: 'string',
               default: 'ideas',

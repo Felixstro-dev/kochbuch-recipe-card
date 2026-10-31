@@ -1,56 +1,36 @@
-# Home Assistant Lovelace Dashboard - Recipe Cards
-# Fügt Rezeptkarten aus dem kochbuch-Backend ein
+# Home Assistant Lovelace – Kochbuch Recipe Card
+# Beispielkonfigurationen für das kochbuch-Backend
 
-recipes:
-  mode: "ideas"  # ideas | full | next-step | inspiration
-  filter_web_only: true  # Nur Web-Rezeptideen zeigen
-  show_shopping_list: true  # Einkaufsliste Button anzeigen
-  search_query: "Backen"  # Suchbegriff
-  columns: 3  # Anzahl der Karten pro Reihe
-  
-# Einzelne Rezeptkarten-Konfigurationen
-# Jede Karte zeigt ein anderes Rezept basierend auf der Suche
+# WICHTIG: base_url auf die Adresse deines Backends setzen
+# (die IP/Port, unter der Home Assistant das Backend erreicht).
 
-# Kleine Karte - Ideen Ansicht (Standard)
-recipe_ideas:
-  type: "custom:ha-recipe-card"
-  mode: "ideas"
-  filter_web_only: true
-  search_query: "Backen"
-  show_shopping_list: true
-  height: "min-max"
-  min_height: 300
-  max_height: 350
+# Kleine Karte – Ideen-Ansicht (Standard)
+type: custom:ha-recipe-card
+base_url: "http://192.168.1.20:8080"
+mode: ideas
+filter_web_only: true
+search_query: "Backen"
+show_shopping_list: true
 
-# Große Karte - Vollständige WebUI Ansicht
-recipe_full:
-  type: "custom:ha-recipe-card"
-  mode: "full"
-  filter_web_only: true
-  search_query: "Backen"
-  show_shopping_list: true
-  height: "min-max"
-  min_height: 400
-  max_height: 500
+# --- Weitere Ansichten (jeweils als eigene Karte) ---
 
-# Mittlere Karte - Nächster Schritt Ansicht
-recipe_next_step:
-  type: "custom:ha-recipe-card"
-  mode: "next-step"
-  filter_web_only: true
-  search_query: "Backen"
-  show_shopping_list: true
-  height: "min-max"
-  min_height: 200
-  max_height: 250
+# Vollständige WebUI-Ansicht
+# type: custom:ha-recipe-card
+# base_url: "http://192.168.1.20:8080"
+# mode: full
+# filter_web_only: true
+# search_query: "Backen"
 
-# Inspirationskarte
-recipe_inspiration:
-  type: "custom:ha-recipe-card"
-  mode: "inspiration"
-  filter_web_only: true
-  search_query: "Backen"
-  show_shopping_list: true
-  height: "min-max"
-  min_height: 250
-  max_height: 300
+# Nächster-Schritt-Ansicht (klein)
+# type: custom:ha-recipe-card
+# base_url: "http://192.168.1.20:8080"
+# mode: next-step
+# filter_web_only: true
+# search_query: "Backen"
+
+# Inspirations-Ansicht
+# type: custom:ha-recipe-card
+# base_url: "http://192.168.1.20:8080"
+# mode: inspiration
+# filter_web_only: true
+# search_query: "Backen"

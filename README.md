@@ -20,11 +20,12 @@ Eine benutzerdefinierte Lovelace-Karte für Home Assistant, die Rezepte aus dem 
 
 ### Option 1: Über HACS (empfohlen)
 
-1. In Home Assistant gehen zu **Einstellungen → Geräte & Dienste → Zusätzliche Frontend-Integrationen**
-2. Klicken Sie auf den "+" Button und suchen Sie nach "custom:ha-recipe-card"
-3. Alternativ die Karten-URL in HACS hinzufügen:
-   - Repository-URL: `https://github.com/<IHR-USERNAME>/ha-recipe-card`
-4. Nach dem Neustart von Home Assistant die Karte im Lovelace-Editor hinzufügen
+1. HACS → Drei-Punkte-Menü → **Benutzerdefinierte Repositories**
+2. Repository: `https://github.com/Felixstro-dev/kochbuch-recipe-card`
+3. Kategorie: **Frontend** (Dashboard)
+4. Auf **Hinzufügen** klicken, dann in HACS nach **Kochbuch Recipe Card** suchen und installieren
+5. Home Assistant neu starten
+6. Karte im Lovelace-Editor hinzufügen
 
 ### Option 2: Manuell
 
@@ -49,44 +50,23 @@ Fügen Sie der `ui-lovelace.yaml` oder über den Lovelace-Editor eine Karte hinz
 
 ```yaml
 type: custom:ha-recipe-card
-mode: ideas          # ideas | full | next-step | inspiration
+base_url: "http://192.168.1.20:8080"   # Adresse deines Backends
+mode: ideas                # ideas | full | next-step | inspiration
 filter_web_only: true
-search_query: "Backen"    # Suchbegriff für das Backend
-show_shopping_list: true  # Einkaufsliste Button
-columns: 3               # Anzahl Karten pro Reihe
-
-# Oder einzelne vorkonfigurierte Karten nutzen:
-recipe_ideas:
-  type: custom:ha-recipe-card
-  mode: ideas
-  search_query: "Backen"
-
-recipe_full:
-  type: custom:ha-recipe-card
-  mode: full
-  search_query: "Backen"
-
-recipe_next_step:
-  type: custom:ha-recipe-card
-  mode: next-step
-  search_query: "Backen"
-
-recipe_inspiration:
-  type: custom:ha-recipe-card
-  mode: inspiration
-  search_query: "Backen"
+search_query: "Backen"     # Suchbegriff für das Backend
+show_shopping_list: true   # Einkaufsliste Button
 ```
 
 ## Konfigurationsoptionen
 
 | Option | Beschreibung | Standard |
 |--------|-------------|----------|
+| `base_url` | Basis-URL des kochbuch-Backends | `''` (gleiche Origin) |
 | `mode` | Ansichtsmodus | `ideas` |
 | `filter_web_only` | Nur Rezepte aus Web-Quelle filtern | `true` |
 | `search_query` | Suchbegriff für die Rezeptsuche | `"Backen"` |
 | `show_shopping_list` | Einkaufsliste Button anzeigen | `true` |
-| `columns` | Karten pro Reihe (für grid-layout) | `3` |
-| `min_height` / `max_height` | Höhenbegrenzung der Karte | Variabel |
+| `limit` | Maximale Anzahl Rezepte | `50` |
 
 ## Einkaufsliste Funktionsweise
 
